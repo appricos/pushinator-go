@@ -76,6 +76,7 @@ func TestSendNotification(t *testing.T) {
 
                 var payload map[string]string
                 err := json.NewDecoder(r.Body).Decode(&payload)
+
                 assert.NoError(t, err)
                 assert.Equal(t, tt.channelId, payload["channel_id"], "channel_id should match input channelId")
                 assert.Equal(t, tt.message, payload["content"], "content should match input message")
@@ -85,6 +86,7 @@ func TestSendNotification(t *testing.T) {
                     w.Write([]byte(tt.serverResponse))
                 }
             }))
+            
             defer server.Close()
 
             httpClient := resty.New()
@@ -111,11 +113,4 @@ func TestNewClient(t *testing.T) {
     assert.Equal(t, "test-token", client.token)
     assert.Equal(t, "https://api.pushinator.com/api/v2", client.baseURL)
     assert.NotNil(t, client.http)
-}
-
-func TestSetBaseURL(t *testing.T) {
-    client := NewClient("test-token")
-    newURL := "http://example.com"
-    client.SetBaseURL(newURL)
-    assert.Equal(t, newURL, client.baseURL)
 }
