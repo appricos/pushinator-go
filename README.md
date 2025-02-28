@@ -1,5 +1,3 @@
-# pushinator-go
-
 # Pushinator Go Client
 
 A Go package that enables developers to send push notifications seamlessly through the Pushinator API.
